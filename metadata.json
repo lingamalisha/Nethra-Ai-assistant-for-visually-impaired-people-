@@ -1,6 +1,11 @@
 {
   "name": "AI-Powered Accessibility Assistant",
   "description": "Voice-guided, mobile-first AI accessibility assistant for visually impaired users in India featuring multilingual OCR (English, Hindi, Kannada), scene description, Indian currency recognition, and offline capabilities.",
-  "requestFramePermissions": ["camera", "microphone"],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

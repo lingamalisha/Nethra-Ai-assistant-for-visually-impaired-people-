@@ -8,7 +8,31 @@
     <meta property="og:title" content="AI-Powered Accessibility Assistant" />
     <meta property="og:description" content="Voice-guided, mobile-first AI accessibility assistant for visually impaired users in India featuring multilingual OCR (English, Hindi, Kannada), scene description, Indian currency recognition, and offline capabilities." />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#0A0A0C" />
+    <script>
+      // Suppress Vite HMR WebSocket errors when HMR is disabled in AI Studio
+      (function() {
+        if (typeof window === 'undefined') return;
+        const origConsoleError = console.error;
+        console.error = function(...args) {
+          if (args[0] && (
+            (args[0] instanceof Error && args[0].message && args[0].message.includes('WebSocket closed without opened')) ||
+            (typeof args[0] === 'string' && args[0].includes('WebSocket closed without opened'))
+          )) {
+            return;
+          }
+          origConsoleError.apply(console, args);
+        };
+
+        window.addEventListener('error', function(e) {
+          if (e && e.message && e.message.includes('WebSocket closed without opened')) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    <meta name="theme-color" content="#F8FAFC" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

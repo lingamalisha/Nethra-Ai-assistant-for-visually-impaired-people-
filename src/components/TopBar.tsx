@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wifi, WifiOff, Globe, Volume2, FastForward } from 'lucide-react';
+import { Wifi, WifiOff, Volume2 } from 'lucide-react';
 import { SupportedLanguage } from '../types';
 import { PWAInstallButton } from './PWAInstallButton';
 import { soundEffects } from '../services/soundEffects';
@@ -30,33 +30,35 @@ export const TopBar: React.FC<TopBarProps> = ({
   return (
     <header
       role="banner"
-      className="w-full bg-zinc-950/95 border-b border-zinc-800 px-3 py-2 flex items-center justify-between gap-2 z-30 select-none"
+      className="w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-3.5 py-2.5 flex items-center justify-between gap-2 z-30 select-none shadow-xs"
     >
-      {/* Brand & Online State */}
+      {/* Brand & Network State */}
       <div className="flex items-center gap-2 shrink-0">
-        <h1 className="text-sm font-extrabold tracking-tight text-yellow-400 flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" aria-hidden="true" />
-          <span>VisionAssist</span>
-        </h1>
+        <div className="flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-xs" aria-hidden="true" />
+          <h1 className="text-sm font-bold tracking-tight text-slate-800">
+            Vision<span className="text-emerald-600">Assist</span>
+          </h1>
+        </div>
 
-        {/* Online / Offline indicator with explicit text + icon */}
+        {/* Friendly calm status badge */}
         <div
           role="status"
           aria-label={isOnline ? 'Online mode. Server AI features active.' : 'Offline mode. Local processing active.'}
-          className={`flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-md border ${
+          className={`flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full border transition-colors ${
             isOnline
-              ? 'border-emerald-600/50 bg-emerald-950/50 text-emerald-400'
-              : 'border-amber-600/60 bg-amber-950/60 text-amber-300'
+              ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+              : 'border-amber-200 bg-amber-50 text-amber-700'
           }`}
         >
           {isOnline ? (
             <>
-              <Wifi className="w-3 h-3 shrink-0" aria-hidden="true" />
+              <Wifi className="w-3 h-3 shrink-0 text-emerald-600" aria-hidden="true" />
               <span>Online</span>
             </>
           ) : (
             <>
-              <WifiOff className="w-3 h-3 shrink-0" aria-hidden="true" />
+              <WifiOff className="w-3 h-3 shrink-0 text-amber-600" aria-hidden="true" />
               <span>Offline</span>
             </>
           )}
@@ -65,24 +67,24 @@ export const TopBar: React.FC<TopBarProps> = ({
 
       {/* Action Zone: Speech Speed, Language Switcher, and PWA Install */}
       <div className="flex items-center gap-1.5 shrink-0">
-        {/* Speed button */}
+        {/* Speed Adjustment Button */}
         <button
           onClick={() => {
             soundEffects.playTap();
             onCycleSpeed();
           }}
           aria-label={`Speech rate ${speechRate}x. Tap to adjust speed.`}
-          className="min-h-[44px] px-2 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-yellow-400 text-zinc-300 hover:text-yellow-400 text-xs font-bold flex items-center gap-1 active:scale-95 focus-visible:outline-4 focus-visible:outline-white"
+          className="min-h-[44px] px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/70 text-xs font-semibold flex items-center gap-1 active:scale-95 transition-all focus-visible:outline-3 focus-visible:outline-indigo-500"
         >
-          <Volume2 className="w-3.5 h-3.5" aria-hidden="true" />
+          <Volume2 className="w-3.5 h-3.5 text-slate-500" aria-hidden="true" />
           <span>{speechRate}x</span>
         </button>
 
-        {/* Trilingual Toggle Buttons */}
+        {/* Trilingual Toggle Buttons in Calm Pastel Pill */}
         <div
           role="group"
           aria-label="Language selection"
-          className="flex items-center bg-zinc-900 border border-zinc-700 rounded-lg p-0.5"
+          className="flex items-center bg-slate-100/90 border border-slate-200/70 rounded-xl p-1 gap-0.5"
         >
           {LANGUAGES.map((lang) => {
             const isSelected = currentLanguage === lang.code;
@@ -96,10 +98,10 @@ export const TopBar: React.FC<TopBarProps> = ({
                 }}
                 aria-pressed={isSelected}
                 aria-label={`Switch language to ${lang.label}`}
-                className={`min-h-[44px] px-2.5 py-1 text-xs font-extrabold rounded-md transition-all active:scale-95 focus-visible:outline-4 focus-visible:outline-white ${
+                className={`min-h-[38px] px-2.5 py-1 text-xs font-semibold rounded-lg transition-all active:scale-95 focus-visible:outline-3 focus-visible:outline-indigo-500 ${
                   isSelected
-                    ? 'bg-yellow-400 text-black shadow-sm'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-emerald-600 text-white shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 {lang.native}

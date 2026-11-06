@@ -260,7 +260,7 @@ export default function App() {
     <main
       role="application"
       aria-label="AI-Powered Accessibility Assistant"
-      className="relative flex flex-col h-screen w-screen bg-[#0A0A0C] text-zinc-100 overflow-hidden font-sans select-none"
+      className="relative flex flex-col h-screen w-screen bg-slate-100 text-slate-800 overflow-hidden font-sans select-none"
     >
       {/* Screen reader live region announcers */}
       <AudioAnnouncer assertiveMessage={assertiveMessage} politeMessage={politeMessage} />
@@ -279,7 +279,7 @@ export default function App() {
       />
 
       {/* Center Viewport: Full-Screen Live Camera Feed with Tactile Hitbox */}
-      <section className="relative flex-1 w-full overflow-hidden bg-black">
+      <section className="relative flex-1 w-full overflow-hidden bg-slate-900">
         <CameraViewport
           videoRef={videoRef}
           cameraState={cameraState}

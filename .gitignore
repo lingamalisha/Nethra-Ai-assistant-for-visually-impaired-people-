@@ -8,3 +8,4 @@ coverage/
 !.env.example
 dev-dist/
 .aistudio/
+bun.lock

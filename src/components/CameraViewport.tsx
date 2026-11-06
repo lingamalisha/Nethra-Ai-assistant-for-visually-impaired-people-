@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camera, RefreshCw, AlertTriangle, Eye } from 'lucide-react';
+import { Camera, RefreshCw, AlertTriangle, Sparkles } from 'lucide-react';
 import { CameraState } from '../types';
 
 interface CameraViewportProps {
@@ -21,90 +21,92 @@ export const CameraViewport: React.FC<CameraViewportProps> = ({
 }) => {
   return (
     <div
-      className="relative w-full h-full bg-black overflow-hidden flex items-center justify-center cursor-pointer select-none"
+      className="relative w-full h-full bg-slate-900 overflow-hidden flex items-center justify-center cursor-pointer select-none"
       onClick={onScreenTap}
       role="region"
       aria-label={`Live camera viewfinder. Currently in ${modeLabel} mode. Tap anywhere on camera to capture and analyze.`}
     >
-      {/* Underlying HTML5 video stream */}
+      {/* HTML5 video stream */}
       <video
         ref={videoRef}
         autoPlay
         playsInline
         muted
         aria-hidden="true"
-        className={`w-full h-full object-cover transition-opacity duration-300 ${
+        className={`w-full h-full object-cover transition-opacity duration-500 ${
           cameraState.isStreaming ? 'opacity-100' : 'opacity-0'
         }`}
       />
 
-      {/* Tactile Framing & High-Contrast Corner Crosshairs */}
+      {/* Gentle, friendly viewfinder brackets */}
       <div
-        className="absolute inset-4 pointer-events-none border-2 border-yellow-400/40 rounded-3xl"
+        className="absolute inset-5 pointer-events-none rounded-3xl border border-white/15"
         aria-hidden="true"
       >
-        {/* Corner guide brackets */}
-        <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-yellow-400 rounded-tl-xl" />
-        <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-yellow-400 rounded-tr-xl" />
-        <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-yellow-400 rounded-bl-xl" />
-        <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-yellow-400 rounded-br-xl" />
+        {/* Soft rounded corner accents */}
+        <div className="absolute top-0 left-0 w-8 h-8 border-t-3 border-l-3 border-emerald-400/80 rounded-tl-2xl" />
+        <div className="absolute top-0 right-0 w-8 h-8 border-t-3 border-r-3 border-emerald-400/80 rounded-tr-2xl" />
+        <div className="absolute bottom-0 left-0 w-8 h-8 border-b-3 border-l-3 border-emerald-400/80 rounded-bl-2xl" />
+        <div className="absolute bottom-0 right-0 w-8 h-8 border-b-3 border-r-3 border-emerald-400/80 rounded-br-2xl" />
 
-        {/* Center Optical Target */}
+        {/* Center Optical Target (soft subtle pulse) */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-16 h-16 border-2 border-dashed border-yellow-400/60 rounded-full flex items-center justify-center">
-            <div className="w-2 h-2 bg-yellow-400 rounded-full" />
+          <div className="w-14 h-14 border border-dashed border-emerald-300/40 rounded-full flex items-center justify-center">
+            <div className="w-2 h-2 bg-emerald-400/80 rounded-full" />
           </div>
         </div>
       </div>
 
-      {/* Camera Loading State */}
+      {/* Calming Loading State */}
       {cameraState.isLoading && (
         <div
           role="status"
           aria-live="polite"
-          className="absolute inset-0 bg-black/85 flex flex-col items-center justify-center text-center p-6 z-10"
+          className="absolute inset-0 bg-slate-900/90 backdrop-blur-xs flex flex-col items-center justify-center text-center p-6 z-10"
         >
-          <div className="w-16 h-16 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mb-4" />
-          <p className="text-xl font-bold text-yellow-400">Initializing Rear Camera...</p>
-          <p className="text-sm text-zinc-300 mt-2">Adjusting optical sensor and focus for vision assistant</p>
+          <div className="w-12 h-12 border-3 border-emerald-400 border-t-transparent rounded-full animate-spin mb-3" />
+          <p className="text-lg font-semibold text-white">Opening camera...</p>
+          <p className="text-xs text-slate-300 mt-1">Preparing clear vision for you</p>
         </div>
       )}
 
-      {/* Permission Denied or Camera Error State */}
+      {/* Friendly Permission Denied / Error State */}
       {cameraState.error && !cameraState.isLoading && (
         <div
           role="alert"
           aria-live="assertive"
-          className="absolute inset-0 bg-zinc-950 flex flex-col items-center justify-center text-center p-8 z-20"
+          className="absolute inset-0 bg-slate-900/95 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6 z-20"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="w-20 h-20 rounded-full bg-red-950/80 border-2 border-red-500 flex items-center justify-center mb-4">
-            <AlertTriangle className="w-10 h-10 text-red-400" aria-hidden="true" />
-          </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Camera Access Required</h2>
-          <p className="text-base text-zinc-300 max-w-md mb-6 leading-relaxed">
-            {cameraState.error}
-          </p>
+          <div className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-xl border border-slate-100 flex flex-col items-center">
+            <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center mb-3 text-amber-600">
+              <AlertTriangle className="w-7 h-7" aria-hidden="true" />
+            </div>
+            <h2 className="text-lg font-bold text-slate-900 mb-1">Camera Access Needed</h2>
+            <p className="text-xs text-slate-600 mb-5 leading-relaxed">
+              {cameraState.error}
+            </p>
 
-          <button
-            onClick={onRetry}
-            aria-label="Grant camera permission and retry"
-            className="flex items-center justify-center gap-3 min-h-[56px] w-full max-w-xs px-6 bg-yellow-400 text-black font-extrabold text-base rounded-2xl shadow-lg hover:bg-yellow-300 active:scale-95 transition-all focus-visible:outline-4 focus-visible:outline-white"
-          >
-            <RefreshCw className="w-5 h-5" aria-hidden="true" />
-            <span>Enable Camera</span>
-          </button>
+            <button
+              onClick={onRetry}
+              aria-label="Grant camera permission and retry"
+              className="flex items-center justify-center gap-2 min-h-[48px] w-full px-5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-2xl shadow-xs active:scale-95 transition-all"
+            >
+              <RefreshCw className="w-4 h-4" aria-hidden="true" />
+              <span>Allow Camera</span>
+            </button>
+          </div>
         </div>
       )}
 
-      {/* Subtle top badge showing active mode and flip button */}
+      {/* Gentle Floating Controls */}
       <div
         className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-2 bg-black/80 border border-yellow-400/50 px-3.5 py-1.5 rounded-full backdrop-blur-md">
-          <Eye className="w-4 h-4 text-yellow-400 shrink-0" aria-hidden="true" />
-          <span className="text-xs font-bold text-yellow-400 uppercase tracking-wider">
+        <div className="flex items-center gap-1.5 bg-white/90 border border-slate-200/60 px-3 py-1.5 rounded-full shadow-xs backdrop-blur-md">
+          <Sparkles className="w-3.5 h-3.5 text-emerald-600 shrink-0" aria-hidden="true" />
+          <span className="text-xs font-semibold text-slate-800 tracking-tight">
             {modeLabel}
           </span>
         </div>
@@ -112,9 +114,9 @@ export const CameraViewport: React.FC<CameraViewportProps> = ({
         <button
           onClick={onFlip}
           aria-label={`Flip camera. Currently using ${cameraState.facingMode === 'environment' ? 'rear' : 'front'} camera.`}
-          className="min-w-[48px] min-h-[48px] flex items-center justify-center bg-black/80 border border-zinc-700 hover:border-yellow-400 rounded-full text-zinc-200 hover:text-yellow-400 backdrop-blur-md active:scale-90 transition-all focus-visible:outline-yellow-400"
+          className="min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/90 border border-slate-200/60 hover:bg-white rounded-full text-slate-700 hover:text-emerald-700 shadow-xs backdrop-blur-md active:scale-90 transition-all focus-visible:outline-3 focus-visible:outline-indigo-500"
         >
-          <Camera className="w-5 h-5" aria-hidden="true" />
+          <Camera className="w-4 h-4" aria-hidden="true" />
         </button>
       </div>
     </div>
