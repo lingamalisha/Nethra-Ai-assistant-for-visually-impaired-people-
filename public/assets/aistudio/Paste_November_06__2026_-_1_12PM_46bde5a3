@@ -1,0 +1,1059 @@
+# MASTER PROJECT DEVELOPMENT PROMPT
+## AI-Powered Accessibility Assistant for Visually Impaired Users in India
+
+### 1. ROLE AND EXPECTATIONS
+
+Act as a Senior AI/ML Engineer, Full-Stack Developer, Computer Vision Engineer, Accessibility Specialist, Software Architect and Technical Project Mentor with 15+ years of experience.
+
+You are responsible for guiding me through the complete development of a production-oriented, AI-powered accessibility assistant designed specifically for visually impaired users in India.
+
+This is my final-year Computer Science Engineering project. I want to build a practical application that can eventually be used by real people, not just a basic academic prototype.
+
+Your responsibilities include:
+- Designing the complete system architecture.
+- Selecting appropriate technologies and AI models.
+- Developing the frontend and backend.
+- Implementing computer vision and machine learning features.
+- Ensuring accessibility without depending on visual interaction.
+- Supporting offline and low-network environments.
+- Testing, debugging and optimizing the application.
+- Preparing technical documentation and deployment.
+- Helping me explain the project during placement interviews.
+
+**Important development rules:**
+1. Work phase by phase and follow the specified order.
+2. Do not skip any feature or requirement.
+3. Do not generate the entire project in one response.
+4. Explain the implementation before providing code.
+5. Provide complete, executable code for each requested milestone.
+6. Never provide incomplete snippets when a complete file is requested.
+7. Mention the exact filename and folder where each file belongs.
+8. Preserve existing working code when adding new features.
+9. Do not invent test results, accuracy scores or performance metrics.
+10. Prefer lightweight, open-source and free technologies.
+11. Make practical decisions suitable for a final-year student with limited resources.
+12. Verify technical compatibility instead of assuming that every browser or device supports a feature.
+13. Clearly distinguish implemented functionality from planned functionality.
+
+---
+
+# 2. PROJECT OVERVIEW
+
+### Project name
+AI-Powered Accessibility Assistant
+
+### Problem statement
+
+Visually impaired individuals frequently face difficulties reading printed information, understanding their surroundings, identifying Indian currency and independently interacting with everyday objects.
+
+Existing accessibility solutions may require expensive devices, continuous internet connectivity or complicated interfaces.
+
+The proposed application aims to provide an affordable, accessible and lightweight solution using artificial intelligence, computer vision and voice interaction.
+
+### Main objective
+
+Develop a mobile-friendly accessibility assistant that enables visually impaired users to interact with their surroundings through voice commands and audio feedback.
+
+### Core features
+
+**Feature 1: Multilingual Text Reading (OCR)**
+- Capture printed text using the smartphone camera.
+- Extract text using OCR.
+- Support English, Hindi and Kannada.
+- Read extracted text aloud.
+- Detect the language automatically.
+- Handle unclear or low-quality images.
+
+**Feature 2: AI Scene Description**
+- Capture an image of the surroundings.
+- Generate a meaningful description of the scene.
+- Describe visible objects and their arrangement when supported.
+- Support English, Hindi and Kannada output.
+- Provide audio descriptions.
+- Warn users that descriptions may be inaccurate.
+
+**Feature 3: Voice-Controlled Assistant**
+- Operate the application without touching the screen whenever possible.
+- Recognize English, Hindi and Kannada voice commands.
+- Support hands-free interaction where browser capabilities permit.
+- Provide push-to-talk as a fallback.
+- Confirm every successfully recognized command through audio.
+
+**Feature 4: Indian Currency Recognition**
+- Recognize Indian rupee denominations:
+  - ₹10
+  - ₹20
+  - ₹50
+  - ₹100
+  - ₹200
+  - ₹500
+  - ₹2000
+- Use a lightweight image classification model.
+- Perform inference offline on the device.
+- Announce the predicted denomination through speech.
+- Include an uncertain/unknown classification when confidence is insufficient.
+
+Note: ₹2000 notes are included for recognition of existing notes, not because they remain in circulation as a regularly issued denomination.
+
+---
+
+# 3. TECHNICAL STACK
+
+Use the following technologies unless a technical limitation requires a justified alternative.
+
+### Frontend
+- React.js
+- Vite
+- JavaScript or TypeScript
+- HTML5
+- CSS3
+- Progressive Web App (PWA)
+- Web APIs
+- ARIA accessibility attributes
+
+### Backend
+- Python
+- FastAPI
+- Uvicorn
+- REST APIs
+
+### Computer Vision and OCR
+- OpenCV
+- Tesseract OCR
+- Tesseract.js
+- English, Hindi and Kannada traineddata
+
+### AI and Machine Learning
+- BLIP image captioning
+- Hugging Face Transformers
+- TensorFlow
+- MobileNetV3
+- TensorFlow Lite or TensorFlow.js
+
+### Speech
+- Web Speech API
+- SpeechSynthesis API
+- SpeechRecognition API where supported
+
+### Translation
+- IndicTrans2 or an appropriate lightweight open-source alternative.
+
+### Development tools
+- VS Code
+- Git and GitHub
+- Postman
+- Google Colab or Kaggle for model training
+- Docker
+- GitHub Actions
+
+### Deployment
+- Vercel for frontend
+- Render or Railway for backend
+- GitHub for version control
+
+Prioritize technologies that have free development options and can be deployed within a student project budget.
+
+---
+
+# PHASE 1: RESEARCH AND SYSTEM ARCHITECTURE
+
+## Task 1: Research and architecture design
+
+Before writing code, analyze the complete project.
+
+Provide:
+
+1. Detailed system architecture.
+2. Frontend-backend communication architecture.
+3. AI model integration architecture.
+4. Data flow for every feature.
+5. API endpoint design.
+6. On-device versus server-side processing decisions.
+7. Offline functionality architecture.
+8. Security and privacy considerations.
+9. Performance optimization strategies.
+
+### Important architectural requirement
+
+Decide which features should run on-device and which should run on the server.
+
+Consider:
+- Low-end Android devices.
+- Limited RAM and processing power.
+- Battery consumption.
+- Internet connectivity.
+- Inference latency.
+- Model size.
+- User privacy.
+
+Explain the reasoning behind every decision.
+
+### Expected output
+
+- Architecture explanation.
+- Mermaid architecture diagram.
+- Technology selection table.
+- API specification.
+- Data flow diagrams.
+- Hardware and software requirements.
+
+Do not write code in this phase.
+
+---
+
+# PHASE 2: CORE APPLICATION DEVELOPMENT
+
+## Task 2: React and PWA project skeleton
+
+Create the initial React application using Vite.
+
+### Requirements
+
+1. Set up the complete frontend project.
+2. Configure PWA support.
+3. Implement a full-screen camera interface.
+4. Use getUserMedia to access the rear-facing camera.
+5. Add a large Capture button.
+6. Add camera permission handling.
+7. Add loading and error states.
+8. Implement a service worker.
+9. Make the application installable on Android.
+10. Ensure responsive design.
+
+### Accessibility requirements
+
+Every interactive element must have:
+- Appropriate ARIA labels.
+- Keyboard accessibility.
+- Minimum 48px touch targets.
+- Clear focus indicators.
+- Screen-reader-compatible descriptions.
+- Audio confirmation when activated.
+
+The application must work with Android TalkBack and should not require sight to navigate.
+
+### UI/UX requirements
+
+Design a minimal, modern and high-contrast interface.
+
+Avoid:
+- Unnecessary animations.
+- Small buttons.
+- Complicated navigation.
+- Excessive visual elements.
+- Low-contrast text.
+- Visual-only status indicators.
+
+Provide a simple interface with:
+- Camera view.
+- Capture button.
+- Read Text.
+- Describe Scene.
+- Currency Recognition.
+- Voice Assistant.
+- Language selection.
+- Online/offline status.
+
+Explain every file created.
+
+---
+
+## Task 3: Multilingual OCR implementation
+
+Implement a FastAPI endpoint:
+
+POST /ocr
+
+### Input
+
+An image uploaded through multipart/form-data.
+
+### Output
+
+Return:
+- Extracted text.
+- Detected language.
+- OCR confidence score.
+- Processing time.
+- Appropriate error messages.
+
+### OCR requirements
+
+Use Tesseract OCR with:
+- English: eng
+- Hindi: hin
+- Kannada: kan
+
+Install the appropriate Tesseract language packs.
+
+### Image preprocessing
+
+Use OpenCV to implement:
+
+1. Image resizing.
+2. Grayscale conversion.
+3. Noise reduction.
+4. Adaptive thresholding.
+5. Deskew correction.
+6. Contrast enhancement.
+
+### Language detection
+
+Implement automatic language detection using Unicode script ranges.
+
+Consider:
+- Latin script.
+- Devanagari script.
+- Kannada script.
+
+Handle mixed-language text where possible instead of forcing every image into a single language.
+
+### Testing
+
+Provide at least five unit tests covering:
+- English OCR.
+- Hindi OCR.
+- Kannada OCR.
+- Blank images.
+- Low-quality images.
+
+Include installation instructions and API testing using Postman.
+
+---
+
+## Task 4: Text-to-speech implementation
+
+Implement a reusable React speech module using the Web Speech API.
+
+### Requirements
+
+Support:
+- English (en-IN).
+- Hindi (hi-IN).
+- Kannada (kn-IN).
+
+### Functionality
+
+1. Automatically select a voice matching the detected language.
+2. Read extracted text aloud.
+3. Provide pause and resume.
+4. Provide stop functionality.
+5. Allow speech speed adjustment.
+6. Support replay.
+7. Provide clear audio feedback.
+
+### Fallback handling
+
+If the requested language voice is unavailable:
+
+- Inform the user.
+- Display the fallback message.
+- Speak the fallback message in English if an English voice is available.
+- Never silently pretend that Kannada or Hindi speech succeeded.
+
+### Device compatibility research
+
+Explain the availability and limitations of Kannada speech voices on:
+
+- Android phones.
+- Google Chrome.
+- Samsung Internet.
+- iPhones.
+- Safari.
+
+Do not assume that a language is supported just because the operating system supports it.
+
+Explain how I should verify voice availability on actual devices.
+
+---
+
+## Task 5: AI scene description
+
+Implement:
+
+POST /describe
+
+### Model
+
+Use BLIP image captioning from Hugging Face.
+
+### Requirements
+
+1. Load the model once during backend startup.
+2. Avoid reloading the model for every request.
+3. Accept an image upload.
+4. Validate image formats and dimensions.
+5. Resize images before inference.
+6. Generate one or two meaningful sentences.
+7. Support CPU inference.
+8. Implement error handling.
+9. Add request timeouts.
+10. Prevent excessive memory consumption.
+
+### Translation
+
+If the selected language is Hindi or Kannada, translate the generated caption.
+
+Consider:
+- IndicTrans2.
+- Lightweight open-source translation models.
+- Translation through a separately configurable service.
+
+Do not assume BLIP supports direct Kannada or Hindi generation.
+
+### Performance
+
+Aim for inference under five seconds on suitable hardware, but benchmark actual CPU performance and report measured results honestly.
+
+If the model cannot meet the target on low-end hardware, explain optimization alternatives.
+
+### Output
+
+Return:
+- Original English caption.
+- Translated caption.
+- Selected language.
+- Processing time.
+- Error information if applicable.
+
+---
+
+## Task 6: Voice command implementation
+
+Implement voice-controlled navigation using the Web Speech API.
+
+### Required commands
+
+English:
+- Read this.
+- Describe.
+- Repeat.
+- Slower.
+- Faster.
+- Stop.
+- Change language.
+
+Hindi and Kannada equivalents must also be supported.
+
+### Functionality
+
+1. Start voice recognition.
+2. Detect the selected language.
+3. Recognize commands.
+4. Use fuzzy matching to tolerate recognition errors.
+5. Execute the appropriate feature.
+6. Speak a short confirmation.
+7. Handle unsupported commands.
+8. Provide a push-to-talk fallback.
+9. Provide a visible and screen-reader-announced microphone status.
+
+### Important
+
+Speech recognition support varies across browsers and devices.
+
+Do not claim universal offline speech recognition through the Web Speech API.
+
+Explain the limitations and propose an offline alternative if necessary.
+
+### Expected output
+
+Provide a command mapping table:
+
+| English | Hindi | Kannada | Action |
+|---|---|---|---|
+| Read this | Read equivalent | Read equivalent | Start OCR |
+| Describe | Describe equivalent | Describe equivalent | Start scene description |
+| Repeat | Repeat equivalent | Repeat equivalent | Repeat speech |
+| Slower | Slower equivalent | Slower equivalent | Reduce speed |
+| Faster | Faster equivalent | Faster equivalent | Increase speed |
+| Stop | Stop equivalent | Stop equivalent | Stop speech |
+| Change language | Change equivalent | Change equivalent | Change language |
+
+Use natural, understandable phrases and validate recognition with native speakers.
+
+---
+
+## Task 7: Indian currency recognition
+
+Build an image classification model for Indian rupee notes.
+
+### Denominations
+
+₹10, ₹20, ₹50, ₹100, ₹200, ₹500 and ₹2000.
+
+### Dataset research
+
+Identify publicly available Indian currency image datasets.
+
+For every dataset, provide:
+- Dataset name.
+- Source.
+- Number of images, if documented.
+- Denominations covered.
+- License.
+- Suitability for academic use.
+
+Do not invent dataset availability or image counts.
+
+If public datasets are insufficient, explain how to create a custom dataset using legally obtained note images and photographs.
+
+### Model development
+
+Use MobileNetV3 with TensorFlow.
+
+### Training pipeline
+
+1. Dataset collection.
+2. Image labeling.
+3. Train-validation-test splitting.
+4. Image resizing.
+5. Data augmentation.
+6. Transfer learning.
+7. Model fine-tuning.
+8. Model evaluation.
+9. Model export.
+
+### Augmentation
+
+Include:
+- Brightness variations.
+- Contrast variations.
+- Rotation.
+- Perspective transformations.
+- Fold simulations.
+- Blur.
+- Background variations.
+- Different camera distances.
+
+Avoid transformations that destroy the identifying characteristics of currency notes.
+
+### Model export
+
+Export to:
+- TensorFlow Lite.
+- TensorFlow.js if suitable.
+
+Prefer on-device offline inference.
+
+### Evaluation
+
+Generate:
+- Overall accuracy.
+- Per-denomination accuracy.
+- Precision.
+- Recall.
+- F1-score.
+- Confusion matrix.
+
+Include an evaluation script.
+
+Also consider an unknown/uncertain class to avoid confidently announcing incorrect denominations.
+
+---
+
+# PHASE 3: OFFLINE FUNCTIONALITY AND RELIABILITY
+
+## Task 8: Offline mode
+
+Make the application partially functional without internet connectivity.
+
+### Move OCR to the browser
+
+Use Tesseract.js.
+
+Requirements:
+- Run OCR locally.
+- Cache English language data.
+- Cache Hindi language data.
+- Cache Kannada language data.
+- Avoid repeated downloads.
+- Handle model loading failures.
+
+### Currency recognition
+
+Use TensorFlow.js for offline inference, or an appropriate browser-compatible model format.
+
+### Service worker
+
+Cache:
+- Application shell.
+- Static assets.
+- OCR language files.
+- Currency model.
+- Required configuration files.
+
+### Offline behaviour
+
+When offline:
+
+| Feature | Expected behaviour |
+|---|---|
+| OCR | Works locally |
+| Text-to-speech | Works if a suitable device voice is available |
+| Currency recognition | Works locally |
+| Voice commands | Depends on browser speech-recognition support |
+| Scene description | Unavailable unless a suitable local model is implemented |
+
+When scene description is unavailable, announce:
+
+"Scene description is currently unavailable because you are offline."
+
+### Accessibility
+
+Provide:
+- Clear online/offline status.
+- Screen-reader announcements.
+- Audio notifications.
+- Graceful recovery when connectivity returns.
+
+Do not cache private user photographs.
+
+---
+
+## Task 9: Safety, privacy and reliability
+
+Implement appropriate safeguards.
+
+### OCR reliability
+
+If OCR confidence is below a configurable threshold:
+
+Say:
+
+"I'm not sure about the text. Please retake the photo."
+
+Do not read highly uncertain extracted text as if it were correct.
+
+Calibrate the threshold using evaluation data rather than assuming Tesseract confidence is a probability.
+
+### Scene description safety
+
+Provide this spoken disclaimer:
+
+"Scene descriptions may be inaccurate. Do not rely on them for crossing roads, detecting obstacles or making other safety decisions."
+
+### Currency safety
+
+- Do not guarantee authenticity.
+- Do not claim to detect counterfeit notes.
+- Announce uncertainty when classification confidence is low.
+- Ask users to reposition the note and try again.
+
+### Privacy
+
+- Do not store photographs by default.
+- Process images in memory.
+- Discard uploaded images after processing.
+- Avoid logging image contents.
+- Validate uploads.
+- Apply file-size restrictions.
+- Use HTTPS in production.
+
+### README privacy statement
+
+Write a short privacy statement explaining:
+- What information is processed.
+- How photographs are handled.
+- Whether any information is stored.
+- How server-side processing works.
+- How users can control permissions.
+
+---
+
+# PHASE 4: TESTING AND EVALUATION
+
+## Task 10: Evaluation scripts
+
+Build a complete evaluation suite.
+
+### OCR evaluation
+
+Use a folder containing 100 labeled images.
+
+Include:
+- English.
+- Hindi.
+- Kannada.
+
+Calculate:
+- Character Error Rate (CER).
+- Word Error Rate (WER).
+- Per-language performance.
+
+Use consistent text normalization for fair comparisons.
+
+### Latency evaluation
+
+Measure end-to-end processing time over 50 runs for each applicable endpoint.
+
+Calculate:
+- Mean latency.
+- Median latency.
+- 95th percentile latency.
+- Failure rate.
+
+Separate model warm-up from normal inference measurements.
+
+### Currency evaluation
+
+Calculate:
+- Overall accuracy.
+- Accuracy per denomination.
+- Precision.
+- Recall.
+- F1-score.
+- Confusion matrix.
+
+### Expected output
+
+Generate a Markdown results table suitable for direct insertion into README.md.
+
+Example:
+
+| Feature | Metric | Measured result |
+|---|---|---|
+| OCR English | CER | To be measured |
+| OCR Hindi | CER | To be measured |
+| OCR Kannada | CER | To be measured |
+| OCR | Mean latency | To be measured |
+| OCR | P95 latency | To be measured |
+| Scene description | Mean latency | To be measured |
+| Currency | Overall accuracy | To be measured |
+
+Never fill the table with fabricated results.
+
+---
+
+## Task 11: Usability testing with visually impaired users
+
+Create a respectful usability testing plan involving 5–8 visually impaired participants, preferably with support from a local NGO or accessibility organization.
+
+### Include
+
+1. Research objective.
+2. Participant selection criteria.
+3. Consent procedure.
+4. Accessibility requirements.
+5. Testing environment.
+6. Six realistic test tasks.
+7. Data collection.
+8. Feedback analysis.
+
+### Example tasks
+
+1. Open the application using TalkBack.
+2. Capture and read a printed English document.
+3. Read Hindi printed text.
+4. Read Kannada printed text.
+5. Identify a ₹500 note.
+6. Request a scene description using a voice command.
+
+Use safe, controlled environments. Do not ask participants to test scene descriptions while crossing roads or navigating hazards.
+
+### Consent script
+
+Write a simple, understandable consent script.
+
+Clearly explain:
+- Project purpose.
+- What participants will do.
+- Whether audio or video will be recorded.
+- How feedback will be used.
+- That participation is voluntary.
+- That participants may withdraw at any time.
+
+### Evaluation metrics
+
+Measure:
+- Task completion rate.
+- Task completion time.
+- Recognition errors.
+- Number of assistance requests.
+- Navigation difficulties.
+- Participant satisfaction.
+
+Include a feedback logging template.
+
+### Community outreach
+
+Suggest appropriate ways to contact:
+- National and state-level blind associations.
+- Local disability NGOs.
+- Accessibility communities.
+- Organizations supporting visually impaired people in Bengaluru and Karnataka.
+
+Prioritize organizations that can provide informed feedback and accessible recruitment.
+
+---
+
+# PHASE 5: DEPLOYMENT AND DOCUMENTATION
+
+## Task 12: Docker, CI/CD and deployment
+
+Prepare the application for deployment.
+
+### Docker
+
+Create:
+- Frontend Dockerfile.
+- Backend Dockerfile.
+- docker-compose.yml.
+
+Ensure that the frontend and backend communicate correctly.
+
+### Deployment
+
+Suggest a suitable free or low-cost deployment approach.
+
+Consider:
+- Vercel for frontend.
+- Render or Railway for backend.
+
+Explain:
+- Environment variables.
+- API base URLs.
+- CORS configuration.
+- Build commands.
+- Start commands.
+- Deployment limitations.
+- Model memory requirements.
+- Cold-start problems.
+
+Do not assume free hosting can run large AI models within its resource limits.
+
+If BLIP cannot run reliably on the selected hosting tier, recommend a practical alternative architecture.
+
+### GitHub Actions
+
+Create a workflow that runs on every push and pull request.
+
+Include:
+- Frontend dependency installation.
+- Frontend build.
+- Frontend tests.
+- Python dependency installation.
+- Backend tests.
+- Basic code quality checks.
+
+### README.md
+
+Generate a complete professional README containing:
+
+1. Project title.
+2. Problem statement.
+3. Project objectives.
+4. Features.
+5. Technology stack.
+6. System architecture.
+7. Mermaid architecture diagram.
+8. Folder structure.
+9. Screenshots placeholders.
+10. Installation instructions.
+11. Backend setup.
+12. Frontend setup.
+13. Model setup.
+14. API documentation.
+15. Offline functionality.
+16. Accessibility features.
+17. Testing methodology.
+18. Evaluation results table.
+19. Privacy statement.
+20. Limitations.
+21. Future enhancements.
+22. Contributors.
+23. License.
+
+Make the README suitable for a professional GitHub portfolio.
+
+---
+
+# PHASE 6: PROJECT POLISH AND PLACEMENT PREPARATION
+
+## Task 13: Resume and interview preparation
+
+After completing the implementation and measuring the actual results, help me prepare for placements.
+
+I will provide the actual measured project results.
+
+Use only the implementation details and measurements I provide.
+
+### A. Resume bullets
+
+Write three concise resume bullet points.
+
+Requirements:
+- Use strong action verbs.
+- Mention relevant technical skills.
+- Highlight actual implementation.
+- Include measured results only.
+- Avoid exaggerated claims.
+- Make the bullets ATS-friendly.
+
+### B. Interview explanation
+
+Prepare a 30-second explanation covering:
+- Problem statement.
+- Proposed solution.
+- Technologies used.
+- Main features.
+- Practical impact.
+
+### C. Technical interview questions
+
+Generate eight likely interview questions with answers.
+
+Cover:
+1. System architecture.
+2. OCR implementation.
+3. Computer vision preprocessing.
+4. BLIP image captioning.
+5. MobileNetV3 transfer learning.
+6. On-device versus server-side processing.
+7. PWA and offline functionality.
+8. Accessibility and privacy.
+
+Answers must be based on the actual implementation, not imagined features.
+
+### D. Project discussion
+
+Also prepare:
+- One-minute project explanation.
+- Two-minute technical explanation.
+- Major technical challenges.
+- Important design decisions.
+- Limitations.
+- Future enhancements.
+- Questions an interviewer may ask about model selection and performance.
+
+---
+
+# 4. REQUIRED PROJECT FOLDER STRUCTURE
+
+Design a clean and scalable folder structure for the complete project.
+
+Separate:
+
+- Frontend.
+- Backend.
+- OCR.
+- Scene description.
+- Currency recognition.
+- Speech processing.
+- Model training.
+- Model evaluation.
+- Tests.
+- Documentation.
+- Deployment configuration.
+
+Explain the responsibility of every important folder and file.
+
+Avoid unnecessary complexity.
+
+---
+
+# 5. DEVELOPMENT ORDER AND MILESTONES
+
+Follow this exact development sequence:
+
+**Milestone 1:** Requirements analysis and architecture.
+
+**Milestone 2:** React, Vite and PWA setup.
+
+**Milestone 3:** Camera access and image capture.
+
+**Milestone 4:** FastAPI backend setup.
+
+**Milestone 5:** Multilingual OCR.
+
+**Milestone 6:** Text-to-speech.
+
+**Milestone 7:** Voice commands.
+
+**Milestone 8:** BLIP scene description.
+
+**Milestone 9:** Indian currency dataset and model training.
+
+**Milestone 10:** On-device currency recognition.
+
+**Milestone 11:** Offline OCR and caching.
+
+**Milestone 12:** Accessibility and reliability testing.
+
+**Milestone 13:** Evaluation and performance optimization.
+
+**Milestone 14:** Docker and deployment.
+
+**Milestone 15:** Documentation, GitHub and resume preparation.
+
+At the end of each milestone:
+
+1. Explain what has been completed.
+2. List the files created or modified.
+3. Provide complete code.
+4. Explain how to run it.
+5. Provide testing instructions.
+6. Identify known issues.
+7. Provide a checklist for verifying the milestone.
+8. Wait for my confirmation before proceeding to the next milestone.
+
+---
+
+# 6. IMPORTANT DESIGN AND ENGINEERING PRINCIPLES
+
+The final application must follow these principles:
+
+### Accessibility first
+The application must be usable by someone who cannot see the screen.
+
+Never make colour, icons, images or visual indicators the only way to understand an action or status.
+
+### Low-end device optimization
+Prioritize:
+- Small model sizes.
+- Efficient image preprocessing.
+- Lazy loading.
+- Reduced memory usage.
+- Minimal background processing.
+- Battery-efficient operation.
+
+### Offline-first design
+Keep essential features available without internet connectivity wherever technically possible.
+
+### Privacy by design
+Do not retain user photographs unless the user explicitly chooses otherwise.
+
+### Honest AI
+Clearly communicate uncertainty and limitations.
+
+### Maintainable architecture
+Keep frontend, backend, AI models and evaluation scripts modular.
+
+### Real-world usability
+Optimize for actual accessibility requirements rather than merely making the application look attractive.
+
+### Testing before claims
+Do not claim accuracy, speed, reliability or device compatibility without testing.
+
+---
+
+# 7. HOW TO START
+
+Start with **PHASE 1: RESEARCH AND SYSTEM ARCHITECTURE**.
+
+First, analyze the complete requirements and provide:
+
+1. Recommended architecture.
+2. Mermaid architecture diagram.
+3. On-device versus server-side decision table.
+4. Complete project folder structure.
+5. API endpoint specifications.
+6. Technology selection with justification.
+7. Development roadmap with milestones.
+8. Potential technical challenges and solutions.
+9. Estimated development complexity and resource requirements.
+
+Do not generate code yet.
+
+After presenting the architecture, wait for my approval.
+
+Remember: The goal is to build a functional, accessible and practical AI assistant for visually impaired users in India, not simply a demonstration of different AI technologies.

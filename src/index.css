@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-top: env(safe-area-inset-top, 0px);
+  }
+
+  html, body {
+    background-color: #0A0A0C;
+    color: #F4F4F5;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* High contrast accessible focus indicators for keyboard and TalkBack / switch navigation */
+  :focus-visible {
+    outline: 4px solid #FACC15 !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* Screen reader only utility class for invisible announcements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
